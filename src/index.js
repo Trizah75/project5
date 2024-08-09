@@ -9,7 +9,7 @@ function displayTemperature(response) {
   let date = new Date(response.date.time * 1000);
   let iconElement = document.querySelector("#icon");
 
-  iconElement.innerHTML = `<img src="${response.date.condition.icon.url}" class="current-temperature-icon">`;
+  iconElement.innerHTML = `<img src="${response.date.condition.icon_url}" class="current-temperature-icon">`;
   cityElement.innerHTML = response.data.city;
   timeElement.innerHTML = formatDate(date);
   descriptionElement.innerHTML = response.data.condition.description;
