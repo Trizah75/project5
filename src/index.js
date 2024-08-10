@@ -1,6 +1,6 @@
 function displayTemperature(response) {
   let temperatureElement = document.querySelector("#current-temperature");
-  let temperature = Math.round(response.data.temperature.current);
+  let temperature = response.data.temperature.current;
   let cityElement = document.querySelector("#current-city");
   let descriptionElement = document.querySelector("#description");
   let humidityElement = document.querySelector("#humidity");
@@ -9,13 +9,13 @@ function displayTemperature(response) {
   let date = new Date(response.date.time * 1000);
   let iconElement = document.querySelector("#icon");
 
-  iconElement.innerHTML = `<img src="${response.date.condition.icon_url}" class="current-temperature-icon">`;
+  iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="current-temperature-icon">`;
   cityElement.innerHTML = response.data.city;
   timeElement.innerHTML = formatDate(date);
   descriptionElement.innerHTML = response.data.condition.description;
   humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
   windSpeedElement.innerHTML = `${response.data.wind.speed}km/h`;
-  temperatureElement.innerHTML = temperature;
+  temperatureElement.innerHTML = Math.round(temperature);
 }
 
 function searchCity(city) {
@@ -28,8 +28,9 @@ function searchCity(city) {
 function search(event) {
   event.preventDefault();
   let searchInputElement = document.querySelector("#search-input");
-  let city = searchInputElement.value;
+  searchCity(searchInputElement.value);
 }
+searchCity("Paris");
 
 function formatDate(date) {
   let minutes = date.getMinutes();
@@ -65,5 +66,3 @@ let currentDateELement = document.querySelector("#current-date");
 let currentDate = new Date();
 
 currentDateELement.innerHTML = formatDate(currentDate);
-
-searchCity("paris");
